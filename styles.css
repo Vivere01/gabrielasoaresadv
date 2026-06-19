@@ -545,12 +545,11 @@ ul { list-style: none; }
 .hero-photo {
   width: 100%;
   height: 540px;
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: cover;
+  object-position: center;
   border-radius: var(--radius-lg);
   position: relative;
   z-index: 1;
-  /* Sem box-shadow pois foto terá fundo transparente */
   filter: drop-shadow(0 16px 40px rgba(13,28,50,.22));
 }
 
