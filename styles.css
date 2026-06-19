@@ -545,12 +545,13 @@ ul { list-style: none; }
 .hero-photo {
   width: 100%;
   height: 540px;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: bottom center;
   border-radius: var(--radius-lg);
   position: relative;
   z-index: 1;
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(197,198,205,.3);
+  /* Sem box-shadow pois foto terá fundo transparente */
+  filter: drop-shadow(0 16px 40px rgba(13,28,50,.22));
 }
 
 /* Floating badges */
@@ -658,39 +659,70 @@ ul { list-style: none; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(48px, 7vw, 96px);
-  align-items: center;
+  align-items: start;
 }
 
 .sobre-media { position: relative; }
 
-.sobre-img-wrap {
+/* ── Layout com duas fotos escalonadas ── */
+.sobre-fotos-duo {
   position: relative;
-  display: inline-block;
   width: 100%;
+  height: clamp(420px, 55vw, 600px);
 }
 
-.sobre-photo {
-  width: 100%;
-  max-width: 460px;
-  height: 520px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  display: block;
-}
-
-.sobre-img-accent {
+.sobre-foto-wrap {
   position: absolute;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 3px solid var(--clr-surface);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sobre-foto-wrap:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg), 0 0 0 2px var(--clr-gold-light);
+}
+
+/* Foto 1 – Séria: canto superior esquerdo, maior, na frente */
+.sobre-foto-1 {
+  top: 0;
+  left: 0;
+  width: 62%;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(119,90,25,.05) 0%, transparent 100%);
+}
+
+/* Foto 2 – Sorrindo: mais abaixo e à direita, levemente menor */
+.sobre-foto-2 {
+  bottom: 0;
+  right: 0;
+  width: 58%;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(13,28,50,.05) 0%, transparent 100%);
+}
+
+.sobre-foto {
   width: 100%;
-  max-width: 460px;
-  height: 520px;
-  top: 20px;
-  left: 20px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Detalhe decorativo dourado atrás das fotos */
+.sobre-fotos-accent {
+  position: absolute;
+  width: 55%;
+  height: 55%;
+  bottom: -12px;
+  left: -12px;
   border: 3px solid var(--clr-gold);
   border-radius: var(--radius-lg);
-  z-index: -1;
-  opacity: .35;
+  z-index: 0;
+  opacity: .25;
+  pointer-events: none;
 }
 
 .sobre-credentials {
@@ -1461,8 +1493,15 @@ a.channel-item:hover {
   .hero-desc { max-width: 100%; }
   .hero-badge-float-1 { left: 0; }
   .hero-badge-float-2 { right: 0; }
+
+  /* Sobre: empilha coluna única, fotos ficam lado a lado em container menor */
   .sobre-grid { grid-template-columns: 1fr; }
-  .sobre-img-wrap { max-width: 420px; margin-inline: auto; }
+  .sobre-fotos-duo {
+    max-width: 420px;
+    height: clamp(300px, 60vw, 400px);
+    margin-inline: auto;
+  }
+
   .diferenciais-grid { grid-template-columns: repeat(2, 1fr); }
   .faq-layout { grid-template-columns: 1fr; }
   .faq-left { position: static; }
