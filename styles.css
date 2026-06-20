@@ -664,57 +664,38 @@ ul { list-style: none; }
 .sobre-media { position: relative; }
 
 /* ── Layout com duas fotos escalonadas ── */
-.sobre-fotos-duo {
+/* ── Layout com foto única no sobre ── */
+.sobre-foto-single-wrap {
   position: relative;
   width: 100%;
-  height: clamp(420px, 55vw, 600px);
+  max-width: 440px;
+  margin-inline: auto;
 }
 
-.sobre-foto-wrap {
-  position: absolute;
+.sobre-foto-single {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center;
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
   border: 3px solid var(--clr-surface);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.sobre-foto-wrap:hover {
+.sobre-foto-single:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow-lg), 0 0 0 2px var(--clr-gold-light);
 }
 
-/* Foto 1 – Séria: canto superior esquerdo, maior, na frente */
-.sobre-foto-1 {
-  top: 0;
-  left: 0;
-  width: 62%;
-  z-index: 2;
-  background: linear-gradient(135deg, rgba(119,90,25,.05) 0%, transparent 100%);
-}
-
-/* Foto 2 – Sorrindo: mais abaixo e à direita, levemente menor */
-.sobre-foto-2 {
-  bottom: 0;
-  right: 0;
-  width: 58%;
-  z-index: 1;
-  background: linear-gradient(135deg, rgba(13,28,50,.05) 0%, transparent 100%);
-}
-
-.sobre-foto {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  object-position: top center;
-}
-
-/* Detalhe decorativo dourado atrás das fotos */
+/* Detalhe decorativo dourado atrás da foto */
 .sobre-fotos-accent {
   position: absolute;
-  width: 55%;
-  height: 55%;
+  width: 100%;
+  height: 100%;
   bottom: -12px;
   left: -12px;
   border: 3px solid var(--clr-gold);
@@ -1495,9 +1476,8 @@ a.channel-item:hover {
 
   /* Sobre: empilha coluna única, fotos ficam lado a lado em container menor */
   .sobre-grid { grid-template-columns: 1fr; }
-  .sobre-fotos-duo {
-    max-width: 420px;
-    height: clamp(300px, 60vw, 400px);
+  .sobre-foto-single-wrap {
+    max-width: 380px;
     margin-inline: auto;
   }
 
